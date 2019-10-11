@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-ContestantRegister-9FCC1B8F-1B33-46AD-B0DA-1409D8B06356</UserSecretsId>
     <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
