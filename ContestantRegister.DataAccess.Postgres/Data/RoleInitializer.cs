@@ -5,7 +5,7 @@ using ContestantRegister.Services.DomainServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContestantRegister.Data
+namespace ContestantRegister.DataAccess
 {
     public class RoleInitializer
     {

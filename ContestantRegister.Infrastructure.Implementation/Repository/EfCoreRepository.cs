@@ -6,7 +6,7 @@ using ContestantRegister.Domain;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     public class EfCoreRepository : EfCoreReadRepository, IRepository
     {

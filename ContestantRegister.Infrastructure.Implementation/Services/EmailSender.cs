@@ -2,7 +2,7 @@
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Services.InfrastructureServices;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     internal class EmailSender : IEmailSender
     {

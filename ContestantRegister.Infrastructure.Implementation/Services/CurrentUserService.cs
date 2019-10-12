@@ -9,7 +9,7 @@ using ContestantRegister.Services.InfrastructureServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     public class CurrentUserService : ICurrentUserService 
     {

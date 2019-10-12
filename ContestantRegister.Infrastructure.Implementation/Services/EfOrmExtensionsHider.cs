@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ContestantRegister.Services.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     public class EfOrmExtensionsHider : IOrmExtensionsHider
     {

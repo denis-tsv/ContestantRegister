@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
-namespace ContestantRegister.Data
+namespace ContestantRegister.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

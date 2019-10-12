@@ -4,7 +4,7 @@ using ContestantRegister.Data;
 using ContestantRegister.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     public class EfCoreReadRepository : IReadRepository
     {

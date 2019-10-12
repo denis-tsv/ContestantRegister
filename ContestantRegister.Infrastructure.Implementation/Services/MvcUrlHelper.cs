@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IMyUrlHelper = ContestantRegister.Services.InfrastructureServices.IUrlHelper;
 
-namespace ContestantRegister.Infrastructure
+namespace ContestantRegister.Infrastructure.Implementation
 {
     public class MvcUrlHelper : IMyUrlHelper
     {

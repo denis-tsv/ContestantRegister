@@ -22,7 +22,7 @@ using ContestantRegister.Cqrs.Features.Frontend.Manage.Utils;
 using ContestantRegister.Data;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Infrastructure;
+using ContestantRegister.Infrastructure.Implementation;
 using ContestantRegister.Models;
 using ContestantRegister.Services.DomainServices;
 using ContestantRegister.Services.DomainServices.ContestRegistration;
