@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Services.InfrastructureServices;
 using ContestantRegister.Utils;
 using FluentScheduler;

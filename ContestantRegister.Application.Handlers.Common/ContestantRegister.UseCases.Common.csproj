@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContestantRegister.Application.Services.Implementation\ContestantRegister.DomainServices.Implementation.csproj" />
     <ProjectReference Include="..\ContestantRegister.Infrastructure.Interfaces\ContestantRegister.Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />
     <ProjectReference Include="..\ContestantRegister.Services\ContestantRegister.DomainServices.Interfaces.csproj" />

@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ContestantRegister.Application.Handlers.Common\ContestantRegister.UseCases.Common.csproj" />
-    <ProjectReference Include="..\ContestantRegister.Application.Services.Implementation\ContestantRegister.DomainServices.Implementation.csproj" />
     <ProjectReference Include="..\ContestantRegister.Framework\ContestantRegister.Framework.csproj" />
     <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />
     <ProjectReference Include="..\ContestantRegister.Services\ContestantRegister.DomainServices.Interfaces.csproj" />

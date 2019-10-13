@@ -1,36 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using ContestantRegister.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Commands;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Utils;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels.SelectedListItem;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.ViewModels;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.Queries;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.QueryHandlers;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.ViewModels;
 using ContestantRegister.Domain;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Framework.Filter;
 using ContestantRegister.Models;
-using ContestantRegister.Services.DomainServices;
 using ContestantRegister.Services.Exceptions;
-using ContestantRegister.Services.InfrastructureServices;
-using ContestantRegister.Utils;
-using CsvHelper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using ValidationException = ContestantRegister.Services.Exceptions.ValidationException;
 
 namespace ContestantRegister.Controllers
@@ -213,7 +198,7 @@ namespace ContestantRegister.Controllers
         //TODO стоит ли делать POST вместо GET?
         public IActionResult CompleteRegistration(int id)
         {
-            return RedirectToAction(nameof(EditRegistration), new { id = id });
+            return RedirectToAction(nameof(EditRegistration), new { id });
         }
 
         private void FillSortingViewData(List<ContestAreaSelectedListItemViewModel> contestAreas, List<CompClassSelectedListItemViewModel> compClasses)

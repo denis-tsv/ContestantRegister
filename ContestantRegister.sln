@@ -41,9 +41,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9F558C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C3CDFF1E-DB4C-4276-AF92-183661C7C3A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferencesAnalyzer", "ReferencesAnalyzer\ReferencesAnalyzer\ReferencesAnalyzer.csproj", "{494D1FB4-66C3-42F2-8E84-38E4AFE93706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReferencesAnalyzer", "ReferencesAnalyzer\ReferencesAnalyzer\ReferencesAnalyzer.csproj", "{494D1FB4-66C3-42F2-8E84-38E4AFE93706}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferencesAnalyzer.Vsix", "ReferencesAnalyzer\ReferencesAnalyzer.Vsix\ReferencesAnalyzer.Vsix.csproj", "{4788606B-C75D-4B58-B043-35A9BA04C58A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{714382EF-583A-44C3-82F6-707850620F6A}"
+	ProjectSection(SolutionItems) = preProject
+		ArchitectureMetrics.xlsx = ArchitectureMetrics.xlsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

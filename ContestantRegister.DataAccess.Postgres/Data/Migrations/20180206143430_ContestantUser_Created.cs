@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class ContestantUser_Created : Migration
     {

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Models;
 using ContestantRegister.Services.InfrastructureServices;
 using FluentScheduler;

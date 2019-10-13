@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Domain;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;

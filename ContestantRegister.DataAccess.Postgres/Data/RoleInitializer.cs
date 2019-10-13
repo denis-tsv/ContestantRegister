@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ContestantRegister.Domain;
+using ContestantRegister.DomainServices.Interfaces.Helpers;
 using ContestantRegister.Models;
 using ContestantRegister.Services.DomainServices;
 using Microsoft.AspNetCore.Identity;
@@ -40,13 +41,13 @@ namespace ContestantRegister.DataAccess
                 await rolesManager.CreateAsync(new IdentityRole(Roles.Admin));
             }
 
-            if (await userManager.FindByNameAsync(UserService.DefaultAdminEmail) == null)
+            if (await userManager.FindByNameAsync(UserHelper.DefaultAdminEmail) == null)
             {
                 var admin = new ApplicationUser
                 {
-                    Email = UserService.DefaultAdminEmail,
+                    Email = UserHelper.DefaultAdminEmail,
                     EmailConfirmed = true,
-                    UserName = UserService.DefaultAdminEmail,
+                    UserName = UserHelper.DefaultAdminEmail,
                     StudyPlace = isit,
                     Name = "Сергей",
                     Surname = "Виденин",

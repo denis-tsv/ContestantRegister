@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class InitialModelCreation : Migration
     {

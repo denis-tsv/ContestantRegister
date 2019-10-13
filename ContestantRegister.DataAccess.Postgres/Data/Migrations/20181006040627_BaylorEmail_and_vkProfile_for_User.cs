@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class BaylorEmail_and_vkProfile_for_User : Migration
     {

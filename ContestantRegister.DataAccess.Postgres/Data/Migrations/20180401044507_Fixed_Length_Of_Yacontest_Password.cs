@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class Fixed_Length_Of_Yacontest_Password : Migration
     {

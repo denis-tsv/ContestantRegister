@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 

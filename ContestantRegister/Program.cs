@@ -1,6 +1,6 @@
 ﻿using System;
 using ContestantRegister.BackgroundJobs;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Models;
 using FluentScheduler;
 using Microsoft.AspNetCore;

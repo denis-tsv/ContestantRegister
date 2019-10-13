@@ -18,7 +18,8 @@ namespace ReferencesAnalyzer
         private List<(string current, string notAllowed)> _layers = new List<(string, string)>
         {
             ( "UseCases", "DataAccess"),
-            ( "UseCases", "Infrastructure.Implementation"),     
+            ( "UseCases", "Infrastructure.Implementation"),
+            ( "UseCases", "DomainServices.Implementation"),
             //Если выделить контроллеры в отельный слой контроллеры, то с них нужно запретить ссылки на DomainServices, DataAccess, Infrastructure (и интерфейсы, и реализация)
         };
 

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class Area_At_Contest_And_Contest_Registration : Migration
     {

@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.Utils;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.Utils;
 using ContestantRegister.Cqrs.Features.Frontend.Home.Utils;
 using ContestantRegister.Cqrs.Features.Frontend.Manage.Utils;
-using ContestantRegister.Data;
+using ContestantRegister.DataAccess;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Framework.Cqrs;
 using ContestantRegister.Infrastructure.Implementation;
@@ -104,6 +106,8 @@ namespace ContestantRegister
         }
     }
 
+    
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -128,6 +132,8 @@ namespace ContestantRegister
                 .AddDefaultTokenProviders();
 
             ConfigureOptions(services);
+
+            //AssemblyStaticticCalculator.Caculate();
 
             var profiles = Assembly
                 .GetEntryAssembly()

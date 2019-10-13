@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ContestantRegister.Data.Migrations
+namespace ContestantRegister.DataAccess.Migrations
 {
     public partial class Email_Add_CreateDate_Column : Migration
     {

@@ -6,6 +6,7 @@ using ContestantRegister.Cqrs.Features.Admin.Users.Queries;
 using ContestantRegister.Cqrs.Features.Admin.Users.ViewModels;
 using ContestantRegister.Domain;
 using ContestantRegister.Domain.Repository;
+using ContestantRegister.DomainServices.Interfaces.Helpers;
 using ContestantRegister.Models;
 using ContestantRegister.Services.DomainServices;
 using ContestantRegister.Services.Extensions;
@@ -31,7 +32,7 @@ namespace ContestantRegister.Cqrs.Features.Admin.Users.QueryHandlers
             var adminIds = admins.Select(u => u.Id).ToList();
             var notAdmins = await ReadRepository.Set<ApplicationUser>().Where(u => !adminIds.Contains(u.Id)).ToListAsync();
 
-            var defaultAdmin = admins.First(a => a.Email == UserService.DefaultAdminEmail);
+            var defaultAdmin = admins.First(a => a.Email == UserHelper.DefaultAdminEmail);
             admins.Remove(defaultAdmin);
             var viewModels = admins.Select(u => new UserAdminViewModel { IsAdmin = true, User = u }).ToList();
             var notAdminViewModels = notAdmins.Select(u => new UserAdminViewModel { User = u }).ToList();

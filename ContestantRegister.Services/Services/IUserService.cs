@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;
-using ContestantRegister.Services.Extensions;
 
 namespace ContestantRegister.Services.DomainServices
 {

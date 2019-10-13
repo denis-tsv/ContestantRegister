@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContestantRegister.Infrastructure.Interfaces\ContestantRegister.Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />
   </ItemGroup>
 

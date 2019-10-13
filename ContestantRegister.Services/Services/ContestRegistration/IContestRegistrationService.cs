@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ContestantRegister.Domain.Repository;
-using ContestantRegister.Models;
-using ContestantRegister.Services.Extensions;
-using ContestantRegister.Services.InfrastructureServices;
 
 namespace ContestantRegister.Services.DomainServices.ContestRegistration
 {

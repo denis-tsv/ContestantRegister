@@ -10,8 +10,6 @@ namespace ContestantRegister.Services.DomainServices
 
     internal class UserService : IUserService
     {
-        public const string DefaultAdminEmail = "acm@sfu-kras.ru";
-
         private readonly IReadRepository _readRepository;
 
         public UserService(IReadRepository readRepository)

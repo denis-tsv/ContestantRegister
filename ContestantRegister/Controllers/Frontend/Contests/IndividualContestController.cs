@@ -1,27 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Threading.Tasks;
-using AutoMapper;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.Commands;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.Queries;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.ViewModels;
-using ContestantRegister.Data;
 using ContestantRegister.Domain;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Models;
-using ContestantRegister.Services.DomainServices;
-using ContestantRegister.Services.DomainServices.ContestRegistration;
 using ContestantRegister.Services.Exceptions;
-using ContestantRegister.Services.InfrastructureServices;
-using ContestantRegister.Utils;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace ContestantRegister.Controllers
 {
