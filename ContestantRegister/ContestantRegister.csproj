@@ -47,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoFilter\AutoFilter.csproj" />
     <ProjectReference Include="..\ContestantRegister.Application.Handlers.Admin\ContestantRegister.UseCases.Admin.csproj" />
     <ProjectReference Include="..\ContestantRegister.Application.Handlers.Common\ContestantRegister.UseCases.Common.csproj" />
     <ProjectReference Include="..\ContestantRegister.Application.Services.Implementation\ContestantRegister.DomainServices.Implementation.csproj" />

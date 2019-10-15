@@ -6,10 +6,10 @@ using ContestantRegister.Cqrs.Features._Common.Commands;
 using ContestantRegister.Cqrs.Features._Common.Queries;
 using ContestantRegister.Domain;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Framework.Filter;
 using ContestantRegister.Services.Exceptions;
 using ContestantRegister.Utils;
 using Microsoft.AspNetCore.Mvc;
+using AutoFilter;
 
 namespace ContestantRegister.Controllers._Common
 {
@@ -202,7 +202,7 @@ namespace ContestantRegister.Controllers._Common
 
         protected void MapFilterToViewData(TGetEntitiesQuery filter)
         {
-            var properties = FastTypeInfo
+            var properties = TypeInfoCache
                 .GetPublicProperties(filter.GetType())
                 .Select(x => new
                 {

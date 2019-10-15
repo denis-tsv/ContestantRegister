@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels.SelectedListItem;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Models;
 
 namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries
 {

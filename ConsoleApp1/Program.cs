@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using ContestantRegister.Data;
-using ContestantRegister.Models;
+﻿//using AutoMapper;
+//using AutoMapper.QueryableExtensions;
+//using ContestantRegister.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using ContestantRegister.Cqrs.Features.Admin.Users.Queries;
-using ContestantRegister.Cqrs.Features.Admin.Users.ViewModels;
-using ContestantRegister.Framework.Ddd;
-using ContestantRegister.Framework.Filter;
-using Microsoft.EntityFrameworkCore;
+//using ContestantRegister.Cqrs.Features.Admin.Users.Queries;
+//using ContestantRegister.Cqrs.Features.Admin.Users.ViewModels;
+//using ContestantRegister.Framework.Ddd;
+//using ContestantRegister.Framework.Filter;
+//using Microsoft.EntityFrameworkCore;
+//using ContestantRegister.DataAccess;
 
 namespace ConsoleApp1
 {
@@ -18,47 +18,50 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            var st = new AutoFilterTests.Querable.KillerFeatureTests();
+            st.CollectionCombination();
+
             //TODO написать нормальные тесты 
-            var context = new ApplicationDbContext();
-            var area = new Area { Name = "Test Delete" };
-            context.Add(area);
-            context.SaveChanges();
+            //var context = new ApplicationDbContext();
+            //var area = new Area { Name = "Test Delete" };
+            //context.Add(area);
+            //context.SaveChanges();
 
-            var c1 = new ApplicationDbContext();
-            var ar = new Area {Id = area.Id};
-            c1.Remove(ar);
-            c1.SaveChanges();
+            //var c1 = new ApplicationDbContext();
+            //var ar = new Area {Id = area.Id};
+            //c1.Remove(ar);
+            //c1.SaveChanges();
 
-            var deq = context.Areas.Find(10);
+            //var deq = context.Areas.Find(10);
 
-            var s1 = new Spec<Area>(x => x.Id < 5);
-            var s2 = new Spec<Area>(x => x.Id < 5);
-            Expression<Func<Area, bool>> e1 = (x) => x.Id < 5;
-            Expression<Func<Area, bool>> e2 = (x) => x.Id < 5;
-            var b = s1 == s2;
-            var b1 = e1 == e2;
+            //var s1 = new Spec<Area>(x => x.Id < 5);
+            //var s2 = new Spec<Area>(x => x.Id < 5);
+            //Expression<Func<Area, bool>> e1 = (x) => x.Id < 5;
+            //Expression<Func<Area, bool>> e2 = (x) => x.Id < 5;
+            //var b = s1 == s2;
+            //var b1 = e1 == e2;
 
-            var s3 = s1 && s2;
-            var r1 = context.Areas.Where(s1).ToList();
-            var r2 = context.Areas.Where(s2).ToList();
-            var r3 = context.Areas.Where(s3).ToList();
+            //var s3 = s1 && s2;
+            //var r1 = context.Areas.Where(s1).ToList();
+            //var r2 = context.Areas.Where(s2).ToList();
+            //var r3 = context.Areas.Where(s3).ToList();
 
-            
-            var u = context
-                    
-                //.Cities
-                //.SingleOrDefault(x => x.Id == 5);
-                //.Include(x => x.StudyPlace)
-                .Users
-                //.Where(x=> x.City, new Spec<City>(x => ids.Contains(x.Id)))
-                //.Include(b => b.ContestRegistrationsParticipant1)
-                //.Where(x => x.ContestRegistrationsParticipant1.Any(r => r.IsOutOfCompetition))
-                //.WhereAny(x => x.ContestRegistrationsParticipant1, new Spec<ContestRegistration>(r => ids.Contains(r.ContestId)))
-                //.Where(x => x.StudyPlace.ShortName.Contains("СФУ"))
-                .Select(x => new { x.Id, x.FirstName, x.Email })                
-                .ToList()
-                ;
-            Console.Out.Flush();
+
+            //var u = context
+
+            //.Cities
+            //.SingleOrDefault(x => x.Id == 5);
+            //.Include(x => x.StudyPlace)
+            // .Users
+            //.Where(x=> x.City, new Spec<City>(x => ids.Contains(x.Id)))
+            //.Include(b => b.ContestRegistrationsParticipant1)
+            //.Where(x => x.ContestRegistrationsParticipant1.Any(r => r.IsOutOfCompetition))
+            //.WhereAny(x => x.ContestRegistrationsParticipant1, new Spec<ContestRegistration>(r => ids.Contains(r.ContestId)))
+            //.Where(x => x.StudyPlace.ShortName.Contains("СФУ"))
+            //    .Select(x => new { x.Id, x.FirstName, x.Email })                
+            //    .ToList()
+            //    ;
+            //Console.Out.Flush();
             //int t = 0;  
 
             //context.Contests.Where(x => !x.IsArchive).ToList();
@@ -96,25 +99,25 @@ namespace ConsoleApp1
 
             //int t = 0;
 
-            var filter = new GetUsersQuery
-            {
-                UserTypeName = "тре",
-                //City = "крас"
-            };
+            //var filter = new GetUsersQuery
+            //{
+            //    UserTypeName = "тре",
+            //    //City = "крас"
+            //};
 
-            var configuration = new MapperConfiguration(cfg =>
-                cfg.CreateMap<ApplicationUser, UserListItemViewModel>()
-                .ForMember(x => x.StudyPlace, opt => opt.MapFrom(y => y.StudyPlace.ShortName))
-                .ForMember(x => x.City, opt => opt.MapFrom(y => y.StudyPlace.City.Name))                
-                );
+            //var configuration = new MapperConfiguration(cfg =>
+            //    cfg.CreateMap<ApplicationUser, UserListItemViewModel>()
+            //    .ForMember(x => x.StudyPlace, opt => opt.MapFrom(y => y.StudyPlace.ShortName))
+            //    .ForMember(x => x.City, opt => opt.MapFrom(y => y.StudyPlace.City.Name))                
+            //    );
 
-            var flt = context.Users
-                //.Where(ApplicationUser.LockoutEnabledSpec.To)
-                .ProjectTo<UserListItemViewModel>(configuration)
-                .AutoFilter(filter)
-                .ToList();
-            Console.Out.Flush();
-            
+            //var flt = context.Users
+            //    //.Where(ApplicationUser.LockoutEnabledSpec.To)
+            //    .ProjectTo<UserListItemViewModel>(configuration)
+            //    .AutoFilter(filter)
+            //    .ToList();
+            //Console.Out.Flush();
+
             //int t1 = 0;
 
             //var city1 = new City { Name = "Абакан" };

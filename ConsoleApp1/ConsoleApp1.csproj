@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContestantRegister\ContestantRegister.csproj" />
+    <ProjectReference Include="..\AutoFilterTests\AutoFilterTests.csproj" />
+    <ProjectReference Include="..\AutoFilter\AutoFilter.csproj" />
   </ItemGroup>
 
 </Project>

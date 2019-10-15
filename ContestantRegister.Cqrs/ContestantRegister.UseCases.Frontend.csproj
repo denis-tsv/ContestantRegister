@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoFilter\AutoFilter.csproj" />
     <ProjectReference Include="..\ContestantRegister.Application.Handlers.Common\ContestantRegister.UseCases.Common.csproj" />
     <ProjectReference Include="..\ContestantRegister.Framework\ContestantRegister.Framework.csproj" />
     <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />

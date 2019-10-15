@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFilter;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels;
 using ContestantRegister.Domain.Repository;
-using ContestantRegister.Framework.Filter;
 using ContestantRegister.Models;
 using ContestantRegister.Services.Exceptions;
 using ContestantRegister.Services.Extensions;

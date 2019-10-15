@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ContestantRegister.Framework.Cqrs;
+﻿using ContestantRegister.Framework.Cqrs;
 using OfficeOpenXml;
 
 namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Individual.Queries

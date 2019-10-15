@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ContestantRegister.Application.Handlers.Frontend.Handlers.Home.Commands;
 using ContestantRegister.Framework.Cqrs;
 using ContestantRegister.Services.InfrastructureServices;

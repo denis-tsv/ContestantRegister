@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.CommandHandlers;
+﻿using AutoMapper;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.Commands;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.ViewModels;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;
 using ContestantRegister.Services.DomainServices.ContestRegistration;
-using ContestantRegister.Services.Exceptions;
-using ContestantRegister.Services.Extensions;
 using ContestantRegister.Services.InfrastructureServices;
 using Microsoft.AspNetCore.Identity;
 

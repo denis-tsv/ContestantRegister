@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoFilter;
 using AutoMapper.QueryableExtensions;
 using ContestantRegister.Cqrs.Features._Common.ListViewModel;
 using ContestantRegister.Cqrs.Features._Common.Queries;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Framework.Extensions;
-using ContestantRegister.Framework.Filter;
 using ContestantRegister.Services.Extensions;
 
 namespace ContestantRegister.Cqrs.Features._Common.QueryHandlers

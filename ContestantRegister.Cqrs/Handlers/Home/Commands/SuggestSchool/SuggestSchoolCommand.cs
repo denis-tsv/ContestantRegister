@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ContestantRegister.Cqrs.Features.Frontend.Home.ViewModels;
+﻿using ContestantRegister.Cqrs.Features.Frontend.Home.ViewModels;
 using ContestantRegister.Framework.Cqrs;
 
 namespace ContestantRegister.Application.Handlers.Frontend.Handlers.Home.Commands

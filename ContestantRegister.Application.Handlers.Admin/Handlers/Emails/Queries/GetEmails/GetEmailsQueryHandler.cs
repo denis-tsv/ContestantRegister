@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFilter;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
 using ContestantRegister.Cqrs.Features.Admin.Emails.Queries;
 using ContestantRegister.Domain.Repository;
-using ContestantRegister.Framework.Filter;
 using ContestantRegister.Models;
 using ContestantRegister.Services.Extensions;
 

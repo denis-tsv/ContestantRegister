@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoFilter\AutoFilter.csproj" />
     <ProjectReference Include="..\ContestantRegister.Application.Handlers.Common\ContestantRegister.UseCases.Common.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Framework\ContestantRegister.Framework.csproj" />
     <ProjectReference Include="..\ContestantRegister.Infrastructure.Interfaces\ContestantRegister.Infrastructure.Interfaces.csproj" />
     <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />
     <ProjectReference Include="..\ContestantRegister.Services\ContestantRegister.DomainServices.Interfaces.csproj" />

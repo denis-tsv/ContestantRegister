@@ -4,7 +4,6 @@ using AutoMapper.QueryableExtensions;
 using ContestantRegister.Application.Handlers.Common.Handlers.Shared.ViewModels;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
 using ContestantRegister.Cqrs.Features.Frontend.Manage.Queries;
-using ContestantRegister.Cqrs.Features.Frontend.Manage.ViewModels;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;
 using ContestantRegister.Services.Extensions;

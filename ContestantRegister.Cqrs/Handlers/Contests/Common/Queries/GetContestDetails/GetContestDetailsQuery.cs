@@ -1,39 +1,34 @@
-﻿using ContestantRegister.Cqrs.Features._Common.ListViewModel;
+﻿using AutoFilter;
+using AutoFilter.Filters;
+using AutoFilter.Filters.Convert;
+using ContestantRegister.Cqrs.Features._Common.ListViewModel;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.ViewModels;
 using ContestantRegister.Framework.Cqrs;
-using ContestantRegister.Framework.Filter;
-using ContestantRegister.Framework.Filter.Attributes;
 using ContestantRegister.Models;
 
 namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries
 {
     public class ContestParticipantFilter
     {
-        [RelatedObject("Participant1", PropertyName = "Surname")]
-        [StringFilter(StringFilter.Contains, IgnoreCase = true)]
+        [NavigationProperty("Participant1", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string ParticipantName { get; set; }
 
-        [RelatedObject("Trainer", PropertyName = "Surname")]
-        [StringFilter(StringFilter.Contains, IgnoreCase = true)]
+        [NavigationProperty("Trainer", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string TrainerName { get; set; }
 
-        [RelatedObject("Manager", PropertyName = "Surname")]
-        [StringFilter(StringFilter.Contains, IgnoreCase = true)]
+        [NavigationProperty("Manager", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string ManagerName { get; set; }
 
-        [StringFilter(StringFilter.Contains, IgnoreCase = true)]
-        [RelatedObject("StudyPlace.City", PropertyName = "Name")]
+        [NavigationProperty("StudyPlace.City", TargetPropertyName = "Name", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string City { get; set; }
 
-        [StringFilter(StringFilter.Contains, IgnoreCase = true)]
-        [RelatedObject("ContestArea.Area", PropertyName = "Name")]
+        [NavigationProperty("ContestArea.Area", TargetPropertyName = "Name", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string Area { get; set; }
 
         [ConvertFilter(typeof(EnumDisplayToValueConverter<ContestRegistrationStatus>))]
         public string Status { get; set; }
 
-        [RelatedObject("StudyPlace", PropertyName = "ShortName")]
-        [StringFilter(StringFilter.StartsWith, IgnoreCase = true)]
+        [NavigationProperty("StudyPlace", TargetPropertyName = "ShortName", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
         public string StudyPlace { get; set; }
     }
 

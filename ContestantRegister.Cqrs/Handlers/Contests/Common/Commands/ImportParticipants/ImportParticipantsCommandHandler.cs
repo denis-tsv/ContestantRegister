@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ContestantRegister.Cqrs.Features._Common.CommandHandlers;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Commands;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Utils;
-using ContestantRegister.Cqrs.Features.Frontend.Contests.Team.Commands;
 using ContestantRegister.Domain.Repository;
 using ContestantRegister.Models;
 using ContestantRegister.Services.Exceptions;

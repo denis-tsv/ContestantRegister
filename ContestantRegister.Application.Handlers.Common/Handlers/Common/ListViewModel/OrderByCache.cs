@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AutoFilter;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
-using ContestantRegister.Framework.Filter;
 
 namespace ContestantRegister.Cqrs.Features._Common.ListViewModel
 {
@@ -22,7 +22,7 @@ namespace ContestantRegister.Cqrs.Features._Common.ListViewModel
 
         private static string CalcOrderBy(Type type)
         {
-            var orderByProps = FastTypeInfo.GetPublicProperties(type)
+            var orderByProps = TypeInfoCache.GetPublicProperties(type)
                 .Select(x => new
                 {
                     Property = x,

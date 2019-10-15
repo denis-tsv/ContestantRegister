@@ -1,6 +1,6 @@
 ﻿using System;
+using AutoFilter.Filters.Convert;
 using ContestantRegister.Framework.Extensions;
-using ContestantRegister.Framework.Filter;
 
 namespace ContestantRegister.Cqrs.Features._Common.ListViewModel
 {
