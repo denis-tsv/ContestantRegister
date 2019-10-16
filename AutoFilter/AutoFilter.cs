@@ -100,13 +100,9 @@ namespace AutoFilter
                     .ToList();
 
             var res = new List<Expression<Func<TItem, bool>>>(capacity: filterProps.Count);
-            var itemProperties = TypeInfoCache.GetPublicPropertiesDictionary(typeof(TItem));
             foreach (var filterProperty in filterProps)
             {
-                var targetName = filterProperty.FilterPropertyAttribute.TargetPropertyName ?? filterProperty.PropertyInfo.Name; 
-                var targetProperty = itemProperties.GetValueOrDefault(targetName);
-                var attribute = filterProperty.FilterPropertyAttribute;
-                var expr = attribute.GetExpression<TItem>(inMemory, filterProperty.PropertyInfo, targetProperty, filter);
+                var expr = filterProperty.FilterPropertyAttribute.GetExpression<TItem>(inMemory, filterProperty.PropertyInfo, filter);
                 res.Add(expr); 
             }
             return res;            

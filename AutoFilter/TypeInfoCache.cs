@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -8,11 +7,10 @@ namespace AutoFilter
 {
     public static class TypeInfoCache
     {
+        public static bool IsEnabled = true;
+
         private static readonly ConcurrentDictionary<Type, PropertyInfo[]> PropertiesCache =
             new ConcurrentDictionary<Type, PropertyInfo[]>();
-
-        private static readonly ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>> PropertiesDictionaryCache =
-            new ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>>();
 
         private static readonly ConcurrentDictionary<Type, MethodInfo[]> MethodsCache =
             new ConcurrentDictionary<Type, MethodInfo[]>();
@@ -20,23 +18,32 @@ namespace AutoFilter
 
         public static PropertyInfo[] GetPublicProperties(Type type)
         {
-            return PropertiesCache.GetOrAdd(type, type
-                .GetProperties()
-                .Where(x => x.CanRead && x.CanWrite)
-                .ToArray());
+            if (!IsEnabled) return CalcPublicProperties(type);
+
+            return PropertiesCache.GetOrAdd(type, CalcPublicProperties(type));
         }
 
-        public static IReadOnlyDictionary<string, PropertyInfo> GetPublicPropertiesDictionary(Type type)
+        private static PropertyInfo[] CalcPublicProperties(Type type)
         {
-            return PropertiesDictionaryCache.GetOrAdd(type, GetPublicProperties(type).ToDictionary(x => x.Name, x => x));
+            return type
+                .GetProperties()
+                .Where(x => x.CanRead && x.CanWrite)
+                .ToArray();
         }
 
         public static MethodInfo[] GetPublicMethods(Type type)
         {
-            return MethodsCache.GetOrAdd(type, type
+            if (!IsEnabled) return CalcPublicMethods(type);
+
+            return MethodsCache.GetOrAdd(type, CalcPublicMethods(type));
+        }
+
+        private static MethodInfo[] CalcPublicMethods(Type type)
+        {
+            return type
                 .GetMethods()
                 .Where(x => x.IsPublic && !x.IsAbstract)
-                .ToArray());
+                .ToArray();
         }
     }
 }

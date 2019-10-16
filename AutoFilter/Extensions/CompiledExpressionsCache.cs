@@ -4,12 +4,18 @@ using System.Linq.Expressions;
 
 namespace AutoFilter.Extensions
 {
-    internal class CompiledExpressionsCache<TIn, TOut>
+    public class CompiledExpressionsCache<TIn, TOut>
     {
+        public static bool IsEnabled = true;
+
         private static readonly ConcurrentDictionary<Expression<Func<TIn, TOut>>, Func<TIn, TOut>> Cache
             = new ConcurrentDictionary<Expression<Func<TIn, TOut>>, Func<TIn, TOut>>();
 
-        internal static Func<TIn, TOut> AsFunc(Expression<Func<TIn, TOut>> expr)
-            => Cache.GetOrAdd(expr, k => k.Compile());
+        public static Func<TIn, TOut> AsFunc(Expression<Func<TIn, TOut>> expr)
+        {
+            if (!IsEnabled) return expr.Compile();
+
+            return Cache.GetOrAdd(expr, k => k.Compile());
+        }
     }
 }

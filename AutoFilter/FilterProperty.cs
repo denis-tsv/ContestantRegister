@@ -2,7 +2,7 @@
 
 namespace AutoFilter
 {
-    internal class FilterProperty
+    public class FilterProperty
     {
         public PropertyInfo PropertyInfo { get; set; }
 

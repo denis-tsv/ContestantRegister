@@ -15,39 +15,41 @@ namespace AutoFilter.Filters
 
         public string Path { get; }
 
-        //TODO не потокобезопасно. решается кешированием GetPropertyExpression в базовом классе
-        Expression _aggregatedNullChecks;
+        private Expression _aggregatedNullChecks;
+        private static Expression _nullConstant = Expression.Constant(null);
 
         protected override Expression GetNestedNullCheckExpression(Expression propertyExpression)
         {
+            if (_aggregatedNullChecks == null)
+            {
+                var nullchecks = new List<Expression>();
+                var propNames = Path.Split('.');
+                var property = Expression.Property(_parameter, propNames[0]);
+
+                var nullCheck = Expression.NotEqual(property, _nullConstant);
+                nullchecks.Add(nullCheck);
+
+                for (int i = 1; i < propNames.Length; i++)
+                {
+                    property = Expression.Property(property, propNames[i]);
+                    nullCheck = Expression.NotEqual(property, _nullConstant);
+                    nullchecks.Add(nullCheck);                    
+                }
+
+                _aggregatedNullChecks = nullchecks.Aggregate((cur, next) => Expression.AndAlso(cur, next));
+            }
             return _aggregatedNullChecks;
         }
 
-        protected override MemberExpression GetPropertyExpression(ParameterExpression parameter, bool inMemory, PropertyInfo filterPropertyInfo)
+        protected override MemberExpression GetPropertyExpression(ParameterExpression parameter, PropertyInfo filterPropertyInfo)
         {
             var propNames = Path.Split('.');
-            var nullchecks = new List<Expression>();
+            
             var property = Expression.Property(parameter, propNames[0]);
-            var nullExpression = Expression.Constant(null);
-
-            if (inMemory)
-            {
-                var nullCheck = Expression.NotEqual(property, nullExpression);
-                nullchecks.Add(nullCheck);
-            }
+            
             for (int i = 1; i < propNames.Length; i++)
             {
-                property = Expression.Property(property, propNames[i]);
-                if (inMemory)
-                {
-                    var nullCheck = Expression.NotEqual(property, nullExpression);
-                    nullchecks.Add(nullCheck);
-                }
-            }
-
-            if (nullchecks.Any())
-            {
-                _aggregatedNullChecks = nullchecks.Aggregate((cur, next) => Expression.AndAlso(cur, next));
+                property = Expression.Property(property, propNames[i]);                
             }
 
             return Expression.Property(property, GetPropertyName(filterPropertyInfo));

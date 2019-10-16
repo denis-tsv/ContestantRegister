@@ -5,12 +5,16 @@ using System.Reflection;
 
 namespace AutoFilter
 {
-    internal static class FilterPropertyCache
+    public static class FilterPropertyCache
     {
         private static readonly ConcurrentDictionary<Type, FilterProperty[]> Cache = new ConcurrentDictionary<Type, FilterProperty[]>();
 
+        public static bool IsEnabled = true;
+
         public static FilterProperty[] GetFilterProperties(Type type)
         {
+            if (!IsEnabled) return CalcFilterProperties(type);
+
             return Cache.GetOrAdd(type, CalcFilterProperties(type));
         }
 
@@ -25,11 +29,11 @@ namespace AutoFilter
                 })
                 .ToArray();
 
-            //у каждого свойства дожне быть атрибут, чтобы кешировать вычисленный PropertyExpression
+            //у каждого свойства должен быть атрибут чтобы кешировать вычисленный PropertyExpression
             foreach(var x in props)
             {
                 if (x.FilterPropertyAttribute == null)
-                    x.FilterPropertyAttribute = new FilterPropertyAttribute();
+                    x.FilterPropertyAttribute = new FilterPropertyAttribute();                
             }
 
             return props;
