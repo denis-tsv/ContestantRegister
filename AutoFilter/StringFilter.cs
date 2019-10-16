@@ -3,6 +3,11 @@
     public enum StringFilterCondition
     {
         StartsWith,
-        Contains
+        Contains,
+        //NotContains,
+        //Exists,
+        //NotExists,
+        //Equals
+        //EndsWith
     }
 }

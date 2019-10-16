@@ -20,7 +20,7 @@ namespace AutoFilter
 
         public StringFilterCondition StringFilter { get; set; } // в атрибуте нельзя задать Nullable свойство значимого типа 
 
-        public bool IgnoreCase { get; set; }
+        public bool IgnoreCase { get; set; } = true;
 
         public FilterCondition FilterCondition { get; set; }
 
