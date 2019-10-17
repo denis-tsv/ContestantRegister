@@ -27,6 +27,7 @@
             //        Enumerable.NavigationPropertyTests.Items.Where(x => x.NestedItem != null).Select(x => x.NestedItem));
             //    Context.NavigationPropertyItems.AddRange(Enumerable.NavigationPropertyTests.Items);
             //    Context.CompositeKindItems.AddRange(Enumerable.CompositeKindTests.Items);
+            //    Context.InvalidCaseItems.AddRange(Enumerable.InvalidCasesTests.Items);
             //    Context.SaveChanges();
 
             //    initialized = true;
@@ -34,3 +35,4 @@
         }
     }
 }
+

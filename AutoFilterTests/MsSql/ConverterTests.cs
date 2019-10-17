@@ -33,7 +33,7 @@ namespace AutoFilterTests.Querable
             //act
 
             //assert
-            Assert.Throws<InvalidOperationException>(() => Context.ConvertItems.AutoFilter(filter));
+            Assert.ThrowsAny<Exception>(() => Context.ConvertItems.AutoFilter(filter));
         }
     }
 }

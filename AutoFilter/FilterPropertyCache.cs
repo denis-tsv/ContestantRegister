@@ -9,7 +9,7 @@ namespace AutoFilter
     {
         private static readonly ConcurrentDictionary<Type, FilterProperty[]> Cache = new ConcurrentDictionary<Type, FilterProperty[]>();
 
-        public static bool IsEnabled = true;
+        public static bool IsEnabled { get; set; } = true;
 
         public static FilterProperty[] GetFilterProperties(Type type)
         {
@@ -29,7 +29,7 @@ namespace AutoFilter
                 })
                 .ToArray();
 
-            //у каждого свойства должен быть атрибут чтобы кешировать вычисленный PropertyExpression
+            //у каждого свойства должен быть атрибут для генерации Expression
             foreach(var x in props)
             {
                 if (x.FilterPropertyAttribute == null)

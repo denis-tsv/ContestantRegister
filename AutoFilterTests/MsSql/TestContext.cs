@@ -27,6 +27,7 @@ namespace AutoFilterTests.Querable
         public DbSet<NavigationPropertyItem> NavigationPropertyItems { get; set; }
         public DbSet<NestedItem> NestedItems { get; set; }
         public DbSet<StringTestItem> StringTestItems { get; set; }
-        public DbSet<CompositeKindItem> CompositeKindItems { get; set; }        
+        public DbSet<CompositeKindItem> CompositeKindItems { get; set; }
+        public DbSet<InvalidCaseItem> InvalidCaseItems { get; set; }
     }
 }

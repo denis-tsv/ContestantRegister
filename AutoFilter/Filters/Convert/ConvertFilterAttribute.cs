@@ -13,7 +13,7 @@ namespace AutoFilter.Filters.Convert
             ConverterType = destinationType;
         }
 
-        public Type ConverterType { get; set; }
+        public Type ConverterType { get; }
 
         protected override object GetPropertyValue(PropertyInfo filterPropertyInfo, object filter)
         {

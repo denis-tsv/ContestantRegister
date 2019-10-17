@@ -15,29 +15,23 @@ namespace AutoFilter.Filters
 
         public string Path { get; }
 
-        private Expression _aggregatedNullChecks;
-        private static Expression _nullConstant = Expression.Constant(null);
+        protected override Expression GetNestedNullCheckExpression(ParameterExpression parameter)
+        {  
+            var nullchecks = new List<Expression>();
+            var propNames = Path.Split('.');
+            var property = Expression.Property(parameter, propNames[0]);
 
-        protected override Expression GetNestedNullCheckExpression(Expression propertyExpression)
-        {
-            if (_aggregatedNullChecks == null)
+            var nullCheck = Expression.NotEqual(property, NullConstant);
+            nullchecks.Add(nullCheck);
+
+            for (int i = 1; i < propNames.Length; i++)
             {
-                var nullchecks = new List<Expression>();
-                var propNames = Path.Split('.');
-                var property = Expression.Property(_parameter, propNames[0]);
-
-                var nullCheck = Expression.NotEqual(property, _nullConstant);
-                nullchecks.Add(nullCheck);
-
-                for (int i = 1; i < propNames.Length; i++)
-                {
-                    property = Expression.Property(property, propNames[i]);
-                    nullCheck = Expression.NotEqual(property, _nullConstant);
-                    nullchecks.Add(nullCheck);                    
-                }
-
-                _aggregatedNullChecks = nullchecks.Aggregate((cur, next) => Expression.AndAlso(cur, next));
+                property = Expression.Property(property, propNames[i]);
+                nullCheck = Expression.NotEqual(property, NullConstant);
+                nullchecks.Add(nullCheck);                    
             }
+
+            var _aggregatedNullChecks = nullchecks.Aggregate((cur, next) => Expression.AndAlso(cur, next));
             return _aggregatedNullChecks;
         }
 

@@ -3,8 +3,10 @@ using System.Collections.Concurrent;
 
 namespace AutoFilter.Filters.Convert
 {
-    internal class FilterValueConvertersCache
+    public class FilterValueConvertersCache
     {
+        public static bool IsEnabled { get; set; } = true;
+
         private static readonly ConcurrentDictionary<Type, IFilverValueConverter> Cache =
             new ConcurrentDictionary<Type, IFilverValueConverter>();
 

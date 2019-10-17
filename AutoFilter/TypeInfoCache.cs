@@ -7,7 +7,7 @@ namespace AutoFilter
 {
     public static class TypeInfoCache
     {
-        public static bool IsEnabled = true;
+        public static bool IsEnabled { get; set; } = true;
 
         private static readonly ConcurrentDictionary<Type, PropertyInfo[]> PropertiesCache =
             new ConcurrentDictionary<Type, PropertyInfo[]>();

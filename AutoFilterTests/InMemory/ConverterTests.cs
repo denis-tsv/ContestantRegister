@@ -58,7 +58,7 @@ namespace AutoFilterTests.Enumerable
             //act
             
             //assert
-            Assert.Throws<InvalidOperationException>(() => Items.AutoFilter(filter));            
+            Assert.ThrowsAny<Exception>(() => Items.AutoFilter(filter));            
         }
 
     }

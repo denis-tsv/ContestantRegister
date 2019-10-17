@@ -9,77 +9,59 @@ namespace AutoFilter
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class FilterPropertyAttribute : Attribute
     {
-        private static string _sync = "sync";
-
-        private static Expression _nullConstant = Expression.Constant(null);
+        protected static Expression NullConstant = Expression.Constant(null);
 
         public string TargetPropertyName { get; set; }
 
-        //нигде не используется, можно выпилить ) или придумать кейс когда он нужен и написать на него тест
-        public Type TargetType { get; set; }
+        public StringFilterCondition StringFilter { get; set; } 
 
-        public StringFilterCondition StringFilter { get; set; } // в атрибуте нельзя задать Nullable свойство значимого типа 
-
-        public bool IgnoreCase { get; set; } = true;
+        public bool IgnoreCase { get; set; }
 
         public FilterCondition FilterCondition { get; set; }
 
-        //TODO удостовеиться, что CLR создает новый класс на каждый generic метод 
-        private MemberExpression _property;
-        private Expression _propertyNullCheck;
-        protected ParameterExpression _parameter;
-        private bool _initialized;
         public virtual Expression<Func<TItem, bool>> GetExpression<TItem>(bool inMemory, PropertyInfo filterPropertyInfo, object filter)
         {
-            lock(_sync)//нужен ли этот кеш? 
-            {
-                if (!_initialized)
-                {
-                    _parameter = Expression.Parameter(typeof(TItem));
-                    _property = GetPropertyExpression(_parameter, filterPropertyInfo);
-                    
-                    _initialized = true;
-                }   
-            }
-            
-            Expression value = Expression.Constant(GetPropertyValue(filterPropertyInfo, filter));
+            var parameter = Expression.Parameter(typeof(TItem));
+            var property = GetPropertyExpression(parameter, filterPropertyInfo);
+            var propertyValue = GetPropertyValue(filterPropertyInfo, filter);
 
-            value = Expression.Convert(value, _property.Type); //например для конвертирования enum в object или int? в int
+            Expression value = Expression.Constant(propertyValue);
 
-            var body = GetBody(_property, value, inMemory, filterPropertyInfo);
+            value = Expression.Convert(value, property.Type); //например для конвертирования enum в object или int? в int
+
+            var body = GetBody(property, value, inMemory);
 
             if (inMemory)
             {
                 var nullChecks = new List<Expression>();
-                
-                var nestedNullCheck = GetNestedNullCheckExpression(_property);//кеш в атрибуте NavigationProperty
+
+                var nestedNullCheck = GetNestedNullCheckExpression(parameter);
                 if (nestedNullCheck != null) nullChecks.Add(nestedNullCheck);
 
-                //для Nullable ValueType не гегерируется проверка самогосвойства на null, но и без этого работает
-                if (!GetPropertyType(filterPropertyInfo).IsValueType)
+                //для Nullable ValueType не гегерируется проверка самогосвойства на null, но это и не нужно
+                if (!property.Type.IsValueType)
                 {
-                    if (_propertyNullCheck == null)
-                        _propertyNullCheck = GetNullCheckExpression(_property);
-                    nullChecks.Add(_propertyNullCheck);
+                    var propertyNullCheck = GetNullCheckExpression(property);
+                    nullChecks.Add(propertyNullCheck);
                 }
                 if (nullChecks.Any())
                 {
                     nullChecks.Add(body);
                     body = nullChecks.Aggregate((x, y) => Expression.AndAlso(x, y));
-                }                
+                }
             }
 
-            var res = Expression.Lambda<Func<TItem, bool>>(body, _parameter);
+            var res = Expression.Lambda<Func<TItem, bool>>(body, parameter);
 
-            return res;
+            return res;                      
         }
 
         protected virtual Expression GetNullCheckExpression(Expression propertyExpression)
         {
-            return Expression.NotEqual(propertyExpression, _nullConstant);
+            return Expression.NotEqual(propertyExpression, NullConstant);
         }
 
-        protected virtual Expression GetNestedNullCheckExpression(Expression propertyExpression)
+        protected virtual Expression GetNestedNullCheckExpression(ParameterExpression parameter)
         {
             return null;
         }
@@ -88,21 +70,15 @@ namespace AutoFilter
         {
             return filterPropertyInfo.GetValue(filter);
         }
-
-        protected virtual Type GetPropertyType(PropertyInfo filterPropertyInfo)
-        {
-            return TargetType ?? filterPropertyInfo.PropertyType;
-        }
-
+                
         protected virtual string GetPropertyName(PropertyInfo filterPropertyInfo)
         {
             return TargetPropertyName ?? filterPropertyInfo.Name;
         }
 
-        protected virtual Expression GetBody(MemberExpression property, Expression value, bool inMemory, PropertyInfo filterPropertyInfo)
+        protected virtual Expression GetBody(MemberExpression property, Expression value, bool inMemory)
         {
-            //TODO тоже можно закешировать, но эффекта практически не будет, и так уже все закешировано,
-            var func = GetBodyBuilderFunc(filterPropertyInfo);
+            var func = GetBodyBuilderFunc(property.Type);
 
             return func(property, value);
         }
@@ -112,10 +88,8 @@ namespace AutoFilter
             return Expression.Property(parameter, GetPropertyName(filterPropertyInfo));
         }
 
-        protected virtual Func<MemberExpression, Expression, Expression> GetBodyBuilderFunc(PropertyInfo filterPropertyInfo)
+        protected virtual Func<MemberExpression, Expression, Expression> GetBodyBuilderFunc(Type propertyType)
         {
-            var propertyType = GetPropertyType(filterPropertyInfo);
-
             if (propertyType == typeof(string))
                 return GetStringBuilderFunc();
 
