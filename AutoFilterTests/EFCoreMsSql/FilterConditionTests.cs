@@ -31,7 +31,10 @@ namespace AutoFilterTests.Querable
             var filter = new FilterConditionFilter { IntGreaterOrEqual = 1 };
 
             //act
-            var filtered = Context.FilterConditionItems.AutoFilter(filter).OrderBy(x => x.IntGreaterOrEqual).ToList();
+            var filtered = Context.FilterConditionItems
+                .AutoFilter(filter)
+                .OrderBy(x => x.IntGreaterOrEqual)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
@@ -47,7 +50,10 @@ namespace AutoFilterTests.Querable
             var filter = new FilterConditionFilter { DateTimeLessOrEqual = new DateTime(2010, 10, 23, 14, 56, 54) };
 
             //act
-            var filtered = Context.FilterConditionItems.AutoFilter(filter).ToList();
+            var filtered = Context.FilterConditionItems
+                .AutoFilter(filter)
+                .OrderBy(x => x.DateTimeLessOrEqual)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);

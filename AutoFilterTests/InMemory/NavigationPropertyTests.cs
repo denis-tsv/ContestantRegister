@@ -100,7 +100,9 @@ namespace AutoFilterTests.Enumerable
             var filter = new NavigationPropertyFilter { NullableIntFilter = 1 };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = Items.AutoFilter(filter)
+                .OrderBy(x => x.NestedItem.NullableInt)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);

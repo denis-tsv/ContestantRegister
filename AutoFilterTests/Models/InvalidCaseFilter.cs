@@ -7,7 +7,7 @@ namespace AutoFilterTests.Models
     {
         public object Convert(object value)
         {
-            return Enum.Parse<TargetEnum>((string)value);
+            return Enum.Parse(typeof(TargetEnum), (string)value);
         }
     }
 

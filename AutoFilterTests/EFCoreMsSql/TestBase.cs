@@ -1,4 +1,8 @@
-﻿namespace AutoFilterTests.Querable
+﻿using System;
+using System.IO;
+using System.Linq;
+
+namespace AutoFilterTests.Querable
 {
     public class TestBase
     {
@@ -16,10 +20,18 @@
         {
             Context = new TestContext();
 
+#if EF6
+            Context.Database.Log = (s) => 
+            {
+                //C:\Users\DenisT\source\repos\ContestantRegister\AutoFilterTests.EF6\bin\Debug\ef6log.txt
+                //File.AppendAllText("ef6log.txt", s);
+                Console.Write(s);
+            };
+#endif
             //if (!initialized)
             //{
-            //    Context.Database.EnsureDeleted();
-            //    Context.Database.EnsureCreated();
+            //    //Context.Database.EnsureDeleted();
+            //    //Context.Database.EnsureCreated();
             //    Context.ConvertItems.AddRange(Enumerable.ConverterTests.Items);
             //    Context.FilterConditionItems.AddRange(Enumerable.FilterConditionTests.Items);
             //    Context.StringTestItems.AddRange(Enumerable.StringTests.Items);

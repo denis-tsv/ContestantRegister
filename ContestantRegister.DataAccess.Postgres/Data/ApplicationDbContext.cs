@@ -26,9 +26,9 @@ namespace ContestantRegister.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-            .UseLoggerFactory(loggerFactory)  //tie-up DbContext with LoggerFactory object
-            .EnableSensitiveDataLogging()
-            .UseNpgsql("Host=localhost;Database=Prod-08-11-2018;Username=postgres;Password=postgres");
+            //.UseLoggerFactory(loggerFactory)  //tie-up DbContext with LoggerFactory object
+            //.EnableSensitiveDataLogging()
+            .UseNpgsql("Host=localhost;Database=ContestantRegister-1;Username=postgres;Password=postgres");
 #endif
         public DbSet<Area> Areas { get; set; }
 

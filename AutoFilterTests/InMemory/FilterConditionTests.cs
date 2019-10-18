@@ -103,7 +103,9 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { IntGreaterOrEqual = 1 };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = Items.AutoFilter(filter)
+                .OrderBy(x => x.IntGreaterOrEqual)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
@@ -118,12 +120,14 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { DateTimeLessOrEqual = new DateTime(2010, 10, 23, 14, 56, 54) };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = Items.AutoFilter(filter)
+                .OrderBy(x => x.DateTimeLessOrEqual)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal(new DateTime(2010, 10, 23, 14, 56, 54), filtered[0].DateTimeLessOrEqual);
-            Assert.Equal(new DateTime(2010, 10, 23), filtered[1].DateTimeLessOrEqual);
+            Assert.Equal(new DateTime(2010, 10, 23), filtered[0].DateTimeLessOrEqual);
+            Assert.Equal(new DateTime(2010, 10, 23, 14, 56, 54), filtered[1].DateTimeLessOrEqual);            
         }
 
         [Fact]

@@ -1,6 +1,10 @@
 ﻿using AutoFilter.Extensions;
 using AutoFilterTests.Models;
+#if EF_CORE
 using Microsoft.EntityFrameworkCore;
+#elif EF6
+using System.Data.Entity;
+#endif
 using System;
 using System.Linq;
 using System.Linq.Expressions;

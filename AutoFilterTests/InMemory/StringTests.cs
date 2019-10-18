@@ -141,12 +141,15 @@ namespace AutoFilterTests.Enumerable
             var filter = new StringFilter { ContainsIgnoreCase = "ContainsIgnoreCase" };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = Items.AutoFilter(filter)
+                .OrderBy(x => x.ContainsIgnoreCase)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal("TestContainsIgnoreCase", filtered[0].ContainsIgnoreCase);
-            Assert.Equal("testcontainsignorecase", filtered[1].ContainsIgnoreCase);
+            Assert.Equal("testcontainsignorecase", filtered[0].ContainsIgnoreCase);
+            Assert.Equal("TestContainsIgnoreCase", filtered[1].ContainsIgnoreCase);
+            
         }
 
         [Fact]
@@ -170,12 +173,15 @@ namespace AutoFilterTests.Enumerable
             var filter = new StringFilter { StartsWithIgnoreCase = "StartsWithIgnoreCase" };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = Items.AutoFilter(filter)
+                .OrderBy(x => x.StartsWithIgnoreCase)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal("StartsWithIgnoreCaseTest", filtered[0].StartsWithIgnoreCase);
-            Assert.Equal("startswithignorecasetest", filtered[1].StartsWithIgnoreCase);
+            Assert.Equal("startswithignorecasetest", filtered[0].StartsWithIgnoreCase);
+            Assert.Equal("StartsWithIgnoreCaseTest", filtered[1].StartsWithIgnoreCase);
+            
         }
 
         [Fact]

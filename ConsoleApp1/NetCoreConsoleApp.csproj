@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoFilterTests\AutoFilterTests.csproj" />
+    <ProjectReference Include="..\AutoFilterTests.EF6\AutoFilterTests.EF6.csproj" />
     <ProjectReference Include="..\AutoFilter\AutoFilter.csproj" />
   </ItemGroup>
 

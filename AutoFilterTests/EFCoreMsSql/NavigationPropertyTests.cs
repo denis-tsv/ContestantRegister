@@ -1,6 +1,10 @@
 ﻿using AutoFilter;
 using AutoFilterTests.Models;
+#if EF_CORE
 using Microsoft.EntityFrameworkCore;
+#elif EF6
+using System.Data.Entity;
+#endif
 using System.Linq;
 using Xunit;
 
@@ -31,12 +35,16 @@ namespace AutoFilterTests.Querable
             var filter = new NavigationPropertyFilter { NullableIntFilter = 1 };
 
             //act
-            var filtered = Context.NavigationPropertyItems.Include(x => x.NestedItem).AutoFilter(filter).ToList();
+            var filtered = Context.NavigationPropertyItems
+                .Include(x => x.NestedItem)
+                .AutoFilter(filter)
+                .OrderBy(x => x.NestedItem.NullableInt)
+                .ToList();
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal(2, filtered[0].NestedItem.NullableInt);
-            Assert.Equal(1, filtered[1].NestedItem.NullableInt);
+            Assert.Equal(1, filtered[0].NestedItem.NullableInt);
+            Assert.Equal(2, filtered[1].NestedItem.NullableInt);
         }
 
         [Fact]
