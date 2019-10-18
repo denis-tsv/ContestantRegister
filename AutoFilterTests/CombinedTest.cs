@@ -20,7 +20,7 @@ namespace AutoFilterTests
 
             //act
             var filteredDatabase = Context.StringTestItems.AutoFilter(filter).ToList();
-            var filteredInMemory = Enumerable.StringTests.Items.AutoFilter(filter).ToList();
+            var filteredInMemory = Enumerable.StringTestsData.Items.AutoFilter(filter).ToList();
 
 
             //assert

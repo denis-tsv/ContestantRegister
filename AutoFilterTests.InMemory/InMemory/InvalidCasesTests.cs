@@ -9,18 +9,6 @@ namespace AutoFilterTests.Enumerable
 {
     public class InvalidCasesTests
     {
-        public static List<InvalidCaseItem> Items = new List<InvalidCaseItem>
-        {
-            new InvalidCaseItem
-            {
-                TargetEnum = TargetEnum.Default
-            },
-            new InvalidCaseItem
-            {
-                TargetEnum = TargetEnum.First
-            },
-        };
-
         [Fact]
         public void WithTargetType()
         {
@@ -28,7 +16,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new InvalidCaseFilter { EnumTargetType = "Default" };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = InvalidCasesTestsData.Items.AutoFilter(filter).ToList();
 
             //asssert
             Assert.Equal(1, filtered.Count);
@@ -44,7 +32,7 @@ namespace AutoFilterTests.Enumerable
             //act
             
             //asssert
-            Assert.ThrowsAny<Exception>(() => Items.AutoFilter(filter));
+            Assert.ThrowsAny<Exception>(() => InvalidCasesTestsData.Items.AutoFilter(filter));
         }
 
         [Fact]
@@ -56,7 +44,7 @@ namespace AutoFilterTests.Enumerable
             //act
             
             //asssert
-            Assert.ThrowsAny<Exception>(() => Items.AutoFilter(filter));
+            Assert.ThrowsAny<Exception>(() => InvalidCasesTestsData.Items.AutoFilter(filter));
         }
     }
 }

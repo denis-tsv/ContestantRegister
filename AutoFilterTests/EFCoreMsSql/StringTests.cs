@@ -83,8 +83,10 @@ namespace AutoFilterTests.Querable
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal("TestContainsIgnoreCase", filtered[0].ContainsIgnoreCase);
-            Assert.Equal("testcontainsignorecase", filtered[1].ContainsIgnoreCase);
+            Assert.Equal("testcontainsignorecase", filtered[0].ContainsIgnoreCase);
+            Assert.Equal("TestContainsIgnoreCase", filtered[1].ContainsIgnoreCase);
+            
+            
 
             /* EF 6
                WHERE ( CAST(CHARINDEX(LOWER(N'ContainsIgnoreCase'), LOWER([Extent1].[ContainsIgnoreCase])) AS int)) > 0
@@ -105,9 +107,9 @@ namespace AutoFilterTests.Querable
                 .ToList();
 
             //assert
-            Assert.Equal(2, filtered.Count);
-            Assert.Equal("StartsWithCase", filtered[0].StartsWithCase);
-            Assert.Equal("startswithcase", filtered[1].StartsWithCase);            
+            Assert.Equal(2, filtered.Count);            
+            Assert.Equal("startswithcase", filtered[0].StartsWithCase);
+            Assert.Equal("StartsWithCase", filtered[1].StartsWithCase);
         }
 
         [Fact]
@@ -125,8 +127,9 @@ namespace AutoFilterTests.Querable
 
             //assert
             Assert.Equal(2, filtered.Count);
-            Assert.Equal("StartsWithIgnoreCaseTest", filtered[0].StartsWithIgnoreCase);
-            Assert.Equal("startswithignorecasetest", filtered[1].StartsWithIgnoreCase);
+            Assert.Equal("startswithignorecasetest", filtered[0].StartsWithIgnoreCase);
+            Assert.Equal("StartsWithIgnoreCaseTest", filtered[1].StartsWithIgnoreCase);
+            
 
             /* EF 6
             WHERE ( CAST(CHARINDEX(LOWER(N'StartsWithIgnoreCase'), LOWER([Extent1].[StartsWithIgnoreCase])) AS int)) = 1

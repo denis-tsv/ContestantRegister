@@ -9,32 +9,6 @@ namespace AutoFilterTests.Enumerable
 {
     public class ConverterTests
     {
-        public static List<ConvertItem> Items = new List<ConvertItem>
-        {
-            new ConvertItem
-            {
-
-            },
-
-            new ConvertItem
-            {
-                WithConverter = true,
-            },
-            new ConvertItem
-            {
-                WithConverter = false,
-            },
-
-            new ConvertItem
-            {
-                WithoutConverter = true,
-            },
-            new ConvertItem
-            {
-                WithoutConverter = false,
-            },
-        };
-
         [Fact]
         public void WithConverter()
         {
@@ -42,7 +16,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new ConvertFilter { WithConverter = 1 };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = ConverterTestsData.Items.AutoFilter(filter).ToList();
 
             //assert
             Assert.Equal(1, filtered.Count);
@@ -58,7 +32,7 @@ namespace AutoFilterTests.Enumerable
             //act
             
             //assert
-            Assert.ThrowsAny<Exception>(() => Items.AutoFilter(filter));            
+            Assert.ThrowsAny<Exception>(() => ConverterTestsData.Items.AutoFilter(filter));            
         }
 
     }

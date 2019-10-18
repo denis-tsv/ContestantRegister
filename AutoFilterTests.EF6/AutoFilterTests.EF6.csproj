@@ -96,60 +96,6 @@
     <Compile Include="..\AutoFilterTests\EFCoreMsSql\TestContext.cs">
       <Link>EF6MsSql\TestContext.cs</Link>
     </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\CompositeKindTests.cs">
-      <Link>InMemory\CompositeKindTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\ConverterTests.cs">
-      <Link>InMemory\ConverterTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\FilterConditionTests.cs">
-      <Link>InMemory\FilterConditionTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\InvalidCasesTests.cs">
-      <Link>InMemory\InvalidCasesTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\NavigationPropertyTests.cs">
-      <Link>InMemory\NavigationPropertyTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\InMemory\StringTests.cs">
-      <Link>InMemory\StringTests.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\CompositeKindFilter.cs">
-      <Link>Models\CompositeKindFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\CompositeKindItem.cs">
-      <Link>Models\CompositeKindItem.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\ConvertFilter.cs">
-      <Link>Models\ConvertFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\ConvertItem.cs">
-      <Link>Models\ConvertItem.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\FilterConditionFilter.cs">
-      <Link>Models\FilterConditionFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\FilterConditionItem.cs">
-      <Link>Models\FilterConditionItem.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\InvalidCaseFilter.cs">
-      <Link>Models\InvalidCaseFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\InvalidCaseItem.cs">
-      <Link>Models\InvalidCaseItem.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\NavigationPropertyFilter.cs">
-      <Link>Models\NavigationPropertyFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\NavigationPropertyItem.cs">
-      <Link>Models\NavigationPropertyItem.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\StringFilter.cs">
-      <Link>Models\StringFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\AutoFilterTests\Models\StringTestItem.cs">
-      <Link>Models\StringTestItem.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +106,10 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoFilterTests.Models\AutoFilterTests.Models.csproj">
+      <Project>{16231323-af6c-42b9-ae6a-426c687475e1}</Project>
+      <Name>AutoFilterTests.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutoFilter\AutoFilter.csproj">
       <Project>{db65200e-06d1-45c5-ae18-86d98e073d33}</Project>
       <Name>AutoFilter</Name>

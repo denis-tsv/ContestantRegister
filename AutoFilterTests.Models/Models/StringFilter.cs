@@ -1,5 +1,4 @@
 ﻿using AutoFilter;
-using System;
 
 namespace AutoFilterTests.Models
 {

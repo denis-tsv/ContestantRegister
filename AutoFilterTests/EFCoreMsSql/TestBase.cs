@@ -32,14 +32,14 @@ namespace AutoFilterTests.Querable
             //{
             //    //Context.Database.EnsureDeleted();
             //    //Context.Database.EnsureCreated();
-            //    Context.ConvertItems.AddRange(Enumerable.ConverterTests.Items);
-            //    Context.FilterConditionItems.AddRange(Enumerable.FilterConditionTests.Items);
-            //    Context.StringTestItems.AddRange(Enumerable.StringTests.Items);
+            //    Context.ConvertItems.AddRange(Enumerable.ConverterTestsData.Items);
+            //    Context.FilterConditionItems.AddRange(Enumerable.FilterConditionTestsData.Items);
+            //    Context.StringTestItems.AddRange(Enumerable.StringTestsData.Items);
             //    Context.NestedItems.AddRange(
-            //        Enumerable.NavigationPropertyTests.Items.Where(x => x.NestedItem != null).Select(x => x.NestedItem));
-            //    Context.NavigationPropertyItems.AddRange(Enumerable.NavigationPropertyTests.Items);
-            //    Context.CompositeKindItems.AddRange(Enumerable.CompositeKindTests.Items);
-            //    Context.InvalidCaseItems.AddRange(Enumerable.InvalidCasesTests.Items);
+            //        Enumerable.NavigationPropertyTestsData.Items.Where(x => x.NestedItem != null).Select(x => x.NestedItem));
+            //    Context.NavigationPropertyItems.AddRange(Enumerable.NavigationPropertyTestsData.Items);
+            //    Context.CompositeKindItems.AddRange(Enumerable.CompositeKindTestsData.Items);
+            //    Context.InvalidCaseItems.AddRange(Enumerable.InvalidCasesTestsData.Items);
             //    Context.SaveChanges();
 
             //    initialized = true;

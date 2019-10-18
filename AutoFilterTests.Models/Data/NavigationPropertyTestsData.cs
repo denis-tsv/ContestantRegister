@@ -1,12 +1,9 @@
-﻿using AutoFilter;
-using AutoFilterTests.Models;
+﻿using AutoFilterTests.Models;
 using System.Collections.Generic;
-using System.Linq;
-using Xunit;
 
 namespace AutoFilterTests.Enumerable
 {
-    public class NavigationPropertyTests
+    public class NavigationPropertyTestsData
     {
         public static List<NavigationPropertyItem> Items = new List<NavigationPropertyItem>
         {
@@ -79,49 +76,6 @@ namespace AutoFilterTests.Enumerable
         };
 
 
-        [Fact]
-        public void IntEqual()
-        {
-            //arrange
-            var filter = new NavigationPropertyFilter { Int = 1 };
-
-            //act
-            var filtered = Items.AutoFilter(filter).ToList();
-
-            //assert
-            Assert.Equal(1, filtered.Count);
-            Assert.Equal(1, filtered[0].NestedItem.Int);
-        }
-
-        [Fact]
-        public void NullableIntGreatOrEqual()
-        {
-            //arrange
-            var filter = new NavigationPropertyFilter { NullableIntFilter = 1 };
-
-            //act
-            var filtered = Items.AutoFilter(filter)
-                .OrderBy(x => x.NestedItem.NullableInt)
-                .ToList();
-
-            //assert
-            Assert.Equal(2, filtered.Count);
-            Assert.Equal(1, filtered[0].NestedItem.NullableInt);
-            Assert.Equal(2, filtered[1].NestedItem.NullableInt);
-        }
-
-        [Fact]
-        public void NestedString()
-        {
-            //arrange
-            var filter = new NavigationPropertyFilter { StringFilter = "Nested" };
-
-            //act
-            var filtered = Items.AutoFilter(filter).ToList();
-
-            //assert
-            Assert.Equal(1, filtered.Count);
-            Assert.Equal("Nested", filtered[0].NestedItem.String);
-        }
+        
     }
 }

@@ -9,79 +9,6 @@ namespace AutoFilterTests.Enumerable
 {
     public class FilterConditionTests
     {
-        public static List<FilterConditionItem> Items = new List<FilterConditionItem>
-        {
-            //BoolEqual
-            new FilterConditionItem
-            {
-
-            },
-            new FilterConditionItem
-            {
-                BoolEqual = true
-            },
-            new FilterConditionItem
-            {
-                BoolEqual = false
-            },
-
-            //IntGreaterOrEqual
-            new FilterConditionItem
-            {
-                IntGreaterOrEqual = 1
-            },
-            new FilterConditionItem
-            {
-                IntGreaterOrEqual = 2
-            },
-            new FilterConditionItem
-            {
-                IntGreaterOrEqual = -1
-            },
-
-            //DateTimeLessOrEqual
-            new FilterConditionItem
-            {
-                DateTimeLessOrEqual = new DateTime(2010, 10, 23, 14, 56, 54)
-            },
-            new FilterConditionItem
-            {
-                DateTimeLessOrEqual = new DateTime(2015, 10, 10)
-            },
-            new FilterConditionItem
-            {
-                DateTimeLessOrEqual = new DateTime(2010, 10, 23)
-            },
-
-            //DecimalLess
-            new FilterConditionItem
-            {
-                DecimalLess = 1000
-            },
-            new FilterConditionItem
-            {
-                DecimalLess = -1000
-            },
-            new FilterConditionItem
-            {
-                DecimalLess = -1
-            },
-
-            //DoubleGreater
-            new FilterConditionItem
-            {
-                DoubleGreater = 1000
-            },
-            new FilterConditionItem
-            {
-                DoubleGreater = -1000
-            },
-            new FilterConditionItem
-            {
-                DoubleGreater = 1
-            },
-        };
-
         [Fact]
         public void BoolEqual()
         {
@@ -89,7 +16,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { BoolEqual = true };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = FilterConditionTestsData.Items.AutoFilter(filter).ToList();
 
             //assert
             Assert.Equal(1, filtered.Count);
@@ -103,7 +30,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { IntGreaterOrEqual = 1 };
 
             //act
-            var filtered = Items.AutoFilter(filter)
+            var filtered = FilterConditionTestsData.Items.AutoFilter(filter)
                 .OrderBy(x => x.IntGreaterOrEqual)
                 .ToList();
 
@@ -120,7 +47,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { DateTimeLessOrEqual = new DateTime(2010, 10, 23, 14, 56, 54) };
 
             //act
-            var filtered = Items.AutoFilter(filter)
+            var filtered = FilterConditionTestsData.Items.AutoFilter(filter)
                 .OrderBy(x => x.DateTimeLessOrEqual)
                 .ToList();
 
@@ -137,7 +64,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { DecimalLess = -1 };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = FilterConditionTestsData.Items.AutoFilter(filter).ToList();
 
             //assert
             Assert.Equal(1, filtered.Count);
@@ -152,7 +79,7 @@ namespace AutoFilterTests.Enumerable
             var filter = new FilterConditionFilter { DoubleGreater = 1 };
 
             //act
-            var filtered = Items.AutoFilter(filter).ToList();
+            var filtered = FilterConditionTestsData.Items.AutoFilter(filter).ToList();
 
             //assert
             Assert.Equal(1, filtered.Count);

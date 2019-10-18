@@ -1,9 +1,4 @@
-﻿using AutoFilter;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoFilterTests.Models
+﻿namespace AutoFilterTests.Models
 {
     public enum TargetEnum
     {
