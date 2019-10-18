@@ -12,6 +12,8 @@ namespace AutoFilter.Filters.Convert
 
         public static IFilverValueConverter GetConverter(Type type)
         {
+            if (!IsEnabled) return (IFilverValueConverter)Activator.CreateInstance(type);
+
             return Cache.GetOrAdd(type, (IFilverValueConverter)Activator.CreateInstance(type));
         }
     }
