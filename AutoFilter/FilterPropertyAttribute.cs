@@ -27,7 +27,7 @@ namespace AutoFilter
 
             Expression value = Expression.Constant(propertyValue);
 
-            value = Expression.Convert(value, property.Type); //например для конвертирования enum в object или int? в int
+            value = Expression.Convert(value, property.Type); //to convert from enum to object or from int? to int
 
             var body = GetBody(property, value, inMemory);
 
@@ -38,7 +38,7 @@ namespace AutoFilter
                 var nestedNullCheck = GetNestedNullCheckExpression(parameter);
                 if (nestedNullCheck != null) nullChecks.Add(nestedNullCheck);
 
-                //для Nullable ValueType не гегерируется проверка самогосвойства на null, но это и не нужно
+                //for Nullable ValueType we don't generate a null check because it don't needed
                 if (!property.Type.IsValueType)
                 {
                     var propertyNullCheck = GetNullCheckExpression(property);

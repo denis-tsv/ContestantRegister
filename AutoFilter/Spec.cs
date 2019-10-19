@@ -32,7 +32,7 @@ namespace AutoFilter
             _expression = expression ?? throw new ArgumentNullException(nameof(expression));
         }
 
-        // только для того, чтобы было похоже на спецификацию по евангелию, на практике не используется
+        // don't used because compilation of expression takes a long time
         public bool IsSatisfiedBy(T obj) => _expression.AsFunc()(obj);
     }
 }

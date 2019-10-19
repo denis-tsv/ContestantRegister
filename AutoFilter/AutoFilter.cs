@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace AutoFilter
 {
-    public static class AutoFilter<TSubject>
+    public class AutoFilter<TSubject>
     {
         public static IQueryable<TSubject> Filter<TFilter>(IQueryable<TSubject> query,
             TFilter filter,
@@ -77,9 +77,9 @@ namespace AutoFilter
             return (IOrderedQueryable<TSubject>)orderBy.Invoke(query, new object[] { query, expression });
         }
 
-        private static Expression<Func<TSubject, bool>> GetExpression<TItem, TFilter>(TFilter filter, ComposeKind composeKind, bool inMemory)
+        protected static Expression<Func<TItem, bool>> GetExpression<TItem, TFilter>(TFilter filter, ComposeKind composeKind, bool inMemory)
         {
-            var propertyExpressions = GetPropertiesExpressions<TSubject, TFilter>(filter, inMemory);
+            var propertyExpressions = GetPropertiesExpressions<TItem, TFilter>(filter, inMemory);
 
             if (!propertyExpressions.Any())
             {

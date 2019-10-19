@@ -7,14 +7,14 @@ namespace AutoFilter.Extensions
 {
     public static class QuerableExtensions
     {
-        public static IQueryable<T> Where<T, TParam>(this IQueryable<T> queryable,
-            Expression<Func<T, TParam>> first, Expression<Func<TParam, bool>> second)
+        public static IQueryable<TItem> Where<TItem, TNavigationProperty>(this IQueryable<TItem> queryable,
+            Expression<Func<TItem, TNavigationProperty>> first, Expression<Func<TNavigationProperty, bool>> second)
         {
             return queryable.Where(first.Combine(second));
         }
 
-        public static IQueryable<T> WhereAny<T, TParam>(this IQueryable<T> queryable,
-            Expression<Func<T, IEnumerable<TParam>>> first, Expression<Func<TParam, bool>> second)
+        public static IQueryable<TItem> WhereAny<TItem, TCollectionNavigationProperty>(this IQueryable<TItem> queryable,
+            Expression<Func<TItem, IEnumerable<TCollectionNavigationProperty>>> first, Expression<Func<TCollectionNavigationProperty, bool>> second)
         {
             return queryable.Where(first.Combine(second));
         }

@@ -87,6 +87,9 @@
     <Compile Include="..\AutoFilterTests\EFCoreMsSql\NavigationPropertyTests.cs">
       <Link>EF6MsSql\NavigationPropertyTests.cs</Link>
     </Compile>
+    <Compile Include="..\AutoFilterTests\EFCoreMsSql\SpecificationTests.cs">
+      <Link>EF6MsSql\SpecificationTests.cs</Link>
+    </Compile>
     <Compile Include="..\AutoFilterTests\EFCoreMsSql\StringTests.cs">
       <Link>EF6MsSql\StringTests.cs</Link>
     </Compile>

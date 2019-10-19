@@ -29,7 +29,7 @@ namespace AutoFilter
                 })
                 .ToArray();
 
-            //у каждого свойства должен быть атрибут для генерации Expression
+            //each property must have an attribute to generate an expression
             foreach(var x in props)
             {
                 if (x.FilterPropertyAttribute == null)
