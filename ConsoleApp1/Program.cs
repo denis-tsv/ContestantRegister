@@ -18,8 +18,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var st = new AutoFilterTests.Querable.StringTests();
-            st.NoAttributes();
+            
 
             //TODO написать нормальные тесты 
             //var context = new ApplicationDbContext();
