@@ -10,25 +10,25 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries
 {
     public class ContestParticipantFilter
     {
-        [NavigationProperty("Participant1", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("Participant1", TargetPropertyName = "Surname")]
         public string ParticipantName { get; set; }
 
-        [NavigationProperty("Trainer", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("Trainer", TargetPropertyName = "Surname")]
         public string TrainerName { get; set; }
 
-        [NavigationProperty("Manager", TargetPropertyName = "Surname", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("Manager", TargetPropertyName = "Surname")]
         public string ManagerName { get; set; }
 
-        [NavigationProperty("StudyPlace.City", TargetPropertyName = "Name", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("StudyPlace.City", TargetPropertyName = "Name")]
         public string City { get; set; }
 
-        [NavigationProperty("ContestArea.Area", TargetPropertyName = "Name", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("ContestArea.Area", TargetPropertyName = "Name")]
         public string Area { get; set; }
 
         [ConvertFilter(typeof(EnumDisplayToValueConverter<ContestRegistrationStatus>))]
         public string Status { get; set; }
 
-        [NavigationProperty("StudyPlace", TargetPropertyName = "ShortName", StringFilter = StringFilterCondition.Contains, IgnoreCase = true)]
+        [NavigationProperty("StudyPlace", TargetPropertyName = "ShortName")]
         public string StudyPlace { get; set; }
     }
 

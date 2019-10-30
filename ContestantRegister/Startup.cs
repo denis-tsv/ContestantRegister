@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoFilter;
 using AutoMapper;
 using ContestantRegister.BackgroundJobs;
 using ContestantRegister.Cqrs.Features.Admin.Areas.Utils;
@@ -250,6 +251,9 @@ namespace ContestantRegister
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            FilterPropertyAttribute.DefaultIgnoreCase = true;
+            FilterPropertyAttribute.DefaultStringFilterCondition = StringFilterCondition.Contains;
 
             app.UseCustomExceptionHandlerMiddleware();
 
