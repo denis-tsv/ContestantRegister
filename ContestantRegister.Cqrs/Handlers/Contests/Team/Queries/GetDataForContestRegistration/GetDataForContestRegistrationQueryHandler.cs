@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ContestantRegister.Application.Handlers.Common.Handlers.Shared.ViewModels;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
@@ -13,8 +14,11 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Team.QueryHandlers
 {
     internal class GetDataForContestRegistrationQueryHandler : ReadRepositoryQueryHandler<GetDataForContestRegistrationQuery, DataForContestRegistration>
     {
-        public GetDataForContestRegistrationQueryHandler(IReadRepository repository) : base(repository)
+        private readonly IMapper _mapper;
+
+        public GetDataForContestRegistrationQueryHandler(IReadRepository repository, IMapper mapper) : base(repository)
         {
+            _mapper = mapper;
         }
 
         public override async Task<DataForContestRegistration> HandleAsync(GetDataForContestRegistrationQuery query)
@@ -25,7 +29,7 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Team.QueryHandlers
             result.Cities = ReadRepository.Set<City>().OrderBy(x => x.Name).ToList();
 
             result.StudyPlaces = ReadRepository.Set<StudyPlace>()
-                .ProjectTo<StudyPlaceDropdownItemViewModel>()
+                .ProjectTo<StudyPlaceDropdownItemViewModel>(_mapper.ConfigurationProvider)
                 .OrderBy(x => x.ShortName)
                 .ToList();
 
@@ -51,7 +55,7 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Team.QueryHandlers
             }
 
             result.Users = await ReadRepository.Set<ApplicationUser>()
-                .ProjectTo<UserForContestRegistrationListItemViewModel>()
+                .ProjectTo<UserForContestRegistrationListItemViewModel>(_mapper.ConfigurationProvider)
                 .OrderBy(x => x.DisplayName)
                 .ToListAsync();
             

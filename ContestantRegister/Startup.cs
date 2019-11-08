@@ -42,70 +42,71 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using IMyUrlHelper = ContestantRegister.Services.InfrastructureServices.IUrlHelper;
 using IUrlHelper = Microsoft.AspNetCore.Mvc.IUrlHelper;
 
 namespace ContestantRegister
 {
-    public class FirstTestCommandMiddleware : CommandHandlerMiddleware
-    {
-        private readonly IEmailSender _emailSender;
+    //public class FirstTestCommandMiddleware : CommandHandlerMiddleware
+    //{
+    //    private readonly IEmailSender _emailSender;
 
-        public FirstTestCommandMiddleware(object next, IEmailSender emailSender) : base(next)
-        {
-            _emailSender = emailSender;
-        }
+    //    public FirstTestCommandMiddleware(object next, IEmailSender emailSender) : base(next)
+    //    {
+    //        _emailSender = emailSender;
+    //    }
 
-        public override Task HandleAsync(ICommand command)
-        {
-            return HandleNextAsync(command);
-        }
-    }
+    //    public override Task HandleAsync(ICommand command)
+    //    {
+    //        return HandleNextAsync(command);
+    //    }
+    //}
 
-    public class SecondTestCommandMiddleware : CommandHandlerMiddleware
-    {
-        private readonly IEmailSender _emailSender;
+    //public class SecondTestCommandMiddleware : CommandHandlerMiddleware
+    //{
+    //    private readonly IEmailSender _emailSender;
 
-        public SecondTestCommandMiddleware(object next, IEmailSender emailSender) : base(next)
-        {
-            _emailSender = emailSender;
-        }
+    //    public SecondTestCommandMiddleware(object next, IEmailSender emailSender) : base(next)
+    //    {
+    //        _emailSender = emailSender;
+    //    }
 
-        public override async Task HandleAsync(ICommand command)
-        {
-            await HandleNextAsync(command);
-        }
-    }
+    //    public override async Task HandleAsync(ICommand command)
+    //    {
+    //        await HandleNextAsync(command);
+    //    }
+    //}
 
-    public class FirstTestQueryMiddleware : QueryHandlerMiddleware
-    {
-        private readonly IEmailSender _emailSender;
+    //public class FirstTestQueryMiddleware : QueryHandlerMiddleware
+    //{
+    //    private readonly IEmailSender _emailSender;
 
-        public FirstTestQueryMiddleware(IEmailSender emailSender, object next) : base(next)
-        {
-            _emailSender = emailSender;
-        }
+    //    public FirstTestQueryMiddleware(IEmailSender emailSender, object next) : base(next)
+    //    {
+    //        _emailSender = emailSender;
+    //    }
 
-        public override async Task<object> HandleAsync(IQuery<object> query)
-        {
-            return await HandleNextAsync(query);
-        }
-    }
+    //    public override async Task<object> HandleAsync(IQuery<object> query)
+    //    {
+    //        return await HandleNextAsync(query);
+    //    }
+    //}
 
-    public class SecondTestQueryMiddleware : QueryHandlerMiddleware
-    {
-        private readonly IEmailSender _emailSender;
+    //public class SecondTestQueryMiddleware : QueryHandlerMiddleware
+    //{
+    //    private readonly IEmailSender _emailSender;
 
-        public SecondTestQueryMiddleware(IEmailSender emailSender, object next) : base(next)
-        {
-            _emailSender = emailSender;
-        }
+    //    public SecondTestQueryMiddleware(IEmailSender emailSender, object next) : base(next)
+    //    {
+    //        _emailSender = emailSender;
+    //    }
 
-        public override Task<object> HandleAsync(IQuery<object> query)
-        {
-            return HandleNextAsync(query);
-        }
-    }
+    //    public override Task<object> HandleAsync(IQuery<object> query)
+    //    {
+    //        return HandleNextAsync(query);
+    //    }
+    //}
 
     
 
@@ -125,8 +126,8 @@ namespace ContestantRegister
                 .PersistKeysToFileSystem(new System.IO.DirectoryInfo("data-protection-keys"))
                 .SetApplicationName("olimp.ikit.sfu-kras.ru");
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>                
+                options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -136,18 +137,12 @@ namespace ContestantRegister
 
             //AssemblyStaticticCalculator.Caculate();
 
-            var profiles = Assembly
+            var assembies = Assembly
                 .GetEntryAssembly()
                 .GetReferencedAssemblies()
                 .Where(x => x.Name.StartsWith("ContestantRegister"))
-                .Select(Assembly.Load)
-                .SelectMany(x => x.DefinedTypes)
-                .Where(type => typeof(Profile).IsAssignableFrom(type.AsType()));
-            services.AddAutoMapper(cfg =>
-            {
-                cfg.CreateMissingTypeMaps = true;
-                cfg.AddProfiles(profiles);
-            });
+                .Select(Assembly.Load);
+            services.AddAutoMapper(assembies);
 
             // Add application services.
             services.AddTransient<IUserService, UserService>();
@@ -192,7 +187,7 @@ namespace ContestantRegister
             services.RegisterTeamContestServices();
             services.RegisterIndividualContestServices();
 
-            services.AddMvc();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             //TODO перетащить вьюхи в папки с фичами
             services.Configure<RazorViewEngineOptions>(options =>
@@ -211,6 +206,10 @@ namespace ContestantRegister
             //Background jobs
             services.AddTransient<EmailJob>();
             services.AddTransient<ContestStatusJob>();
+
+            /*
+             services.AddControllersWithViews();
+             */
         }
 
         public void ConfigureOptions(IServiceCollection services)
@@ -229,10 +228,10 @@ namespace ContestantRegister
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
             var ruCultureInfo = new CultureInfo("ru-RU");
-
+    
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(ruCultureInfo),
@@ -269,6 +268,32 @@ namespace ContestantRegister
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            /*
+             if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+             */
         }
     }
 }

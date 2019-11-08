@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ContestantRegister.Application.Handlers.Common.Handlers.Shared.ViewModels;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
@@ -12,8 +13,11 @@ namespace ContestantRegister.Cqrs.Features.Admin.Users.QueryHandlers
 {
     internal class GetDataForUserDetailsQueryHandler : ReadRepositoryQueryHandler<GetDataForUserDetailsQuery, DataForUserDetails>
     {
-        public GetDataForUserDetailsQueryHandler(IReadRepository repository) : base(repository)
+        private readonly IMapper _mapper;
+
+        public GetDataForUserDetailsQueryHandler(IReadRepository repository, IMapper mapper) : base(repository)
         {
+            _mapper = mapper;
         }
 
         public override async Task<DataForUserDetails> HandleAsync(GetDataForUserDetailsQuery query)
@@ -25,7 +29,7 @@ namespace ContestantRegister.Cqrs.Features.Admin.Users.QueryHandlers
                 .ToListAsync();
 
             result.StudyPlaces = await ReadRepository.Set<StudyPlace>()
-                .ProjectTo<StudyPlaceDropdownItemViewModel>()
+                .ProjectTo<StudyPlaceDropdownItemViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return result;

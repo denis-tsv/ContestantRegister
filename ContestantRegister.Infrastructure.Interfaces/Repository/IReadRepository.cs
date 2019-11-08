@@ -6,7 +6,7 @@ namespace ContestantRegister.Domain.Repository
 {
     internal interface IReadRepository : IDisposable
     {
-        Task<TEntity> FindAsync<TEntity>(object key) where TEntity : class;
+        ValueTask<TEntity> FindAsync<TEntity>(object key) where TEntity : class;
 
         IQueryable<TEntity> Set<TEntity>() where TEntity : class;
     }

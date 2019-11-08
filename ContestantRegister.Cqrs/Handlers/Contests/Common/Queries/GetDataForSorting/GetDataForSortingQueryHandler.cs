@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ContestantRegister.Cqrs.Features._Common.QueryHandlers;
 using ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Queries;
@@ -12,15 +13,18 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.QueryHandler
 {
     internal class GetDataForSortingQueryHandler : ReadRepositoryQueryHandler<GetDataForSortingQuery, DataForSorting>
     {
-        public GetDataForSortingQueryHandler(IReadRepository repository) : base(repository)
+        private readonly IMapper _mapper;
+
+        public GetDataForSortingQueryHandler(IReadRepository repository, IMapper mapper) : base(repository)
         {
+            _mapper = mapper;
         }
 
         public override async Task<DataForSorting> HandleAsync(GetDataForSortingQuery query)
         {
             var compClassVMs = await ReadRepository.Set<CompClass>()
                 .OrderBy(x => x.Name)
-                .ProjectTo<CompClassSelectedListItemViewModel>()
+                .ProjectTo<CompClassSelectedListItemViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             if (query.SelectedCompClassIds != null)
@@ -35,7 +39,7 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.QueryHandler
                 //.Include(x => x.Area) // можно убрать, ведь достаем проекции, а не доменные объекты
                 .Where(x => x.ContestId == query.ContestId)
                 .OrderBy(x => x.Area.Name)
-                .ProjectTo<ContestAreaSelectedListItemViewModel>()
+                .ProjectTo<ContestAreaSelectedListItemViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
             if (query.SelectedContestAreaId.HasValue)
             {

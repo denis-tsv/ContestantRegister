@@ -14,9 +14,9 @@ namespace ContestantRegister.DataAccess
         }
 
 #if DEBUG
-        public static readonly ILoggerFactory loggerFactory = new LoggerFactory(new[] {
-              new ConsoleLoggerProvider((_, __) => true, true)
-        });
+        //public static readonly ILoggerFactory loggerFactory = new LoggerFactory(new[] {
+        //      new ConsoleLoggerProvider((_, __) => true, true)
+        //});
         
 
         public ApplicationDbContext()
@@ -24,11 +24,11 @@ namespace ContestantRegister.DataAccess
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-            //.UseLoggerFactory(loggerFactory)  //tie-up DbContext with LoggerFactory object
-            //.EnableSensitiveDataLogging()
-            .UseNpgsql("Host=localhost;Database=ContestantRegister-1;Username=postgres;Password=postgres");
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder
+        //    //.UseLoggerFactory(loggerFactory)  //tie-up DbContext with LoggerFactory object
+        //    //.EnableSensitiveDataLogging()
+        //    .UseNpgsql("Host=localhost;Database=ContestantRegister-1;Username=postgres;Password=postgres");
 #endif
         public DbSet<Area> Areas { get; set; }
 
@@ -54,6 +54,8 @@ namespace ContestantRegister.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
@@ -97,7 +99,7 @@ namespace ContestantRegister.DataAccess
             {
                 entity.HasOne(e => e.Contest)
                     .WithMany(p => p.ContestRegistrations)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(e => e.StudyPlace)
                     .WithMany(p => p.ContestRegistrations)

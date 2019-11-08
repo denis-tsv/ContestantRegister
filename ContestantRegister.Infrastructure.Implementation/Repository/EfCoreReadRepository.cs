@@ -19,7 +19,7 @@ namespace ContestantRegister.Infrastructure.Implementation
             Context.Dispose();
         }
 
-        public Task<TEntity> FindAsync<TEntity>(object key) where TEntity : class
+        public ValueTask<TEntity> FindAsync<TEntity>(object key) where TEntity : class
         {
             return Context.FindAsync<TEntity>(key);
         }
