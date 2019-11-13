@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContestantRegister.Application.Handlers.Admin\ContestantRegister.UseCases.Admin.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Application.Handlers.Common\ContestantRegister.UseCases.Common.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Application.Services.Implementation\ContestantRegister.DomainServices.Implementation.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Cqrs\ContestantRegister.UseCases.Frontend.csproj" />
+    <ProjectReference Include="..\ContestantRegister.DataAccess.Postgres\ContestantRegister.DataAccess.Postgres.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Framework\ContestantRegister.Framework.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Infrastructure.Implementation\ContestantRegister.Infrastructure.Implementation.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Infrastructure.Interfaces\ContestantRegister.Infrastructure.Interfaces.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Models\ContestantRegister.Entities.csproj" />
+    <ProjectReference Include="..\ContestantRegister.Services\ContestantRegister.DomainServices.Interfaces.csproj" />
+    <ProjectReference Include="..\ContestantRegister\ContestantRegister.csproj" />
+  </ItemGroup>
+
+</Project>
