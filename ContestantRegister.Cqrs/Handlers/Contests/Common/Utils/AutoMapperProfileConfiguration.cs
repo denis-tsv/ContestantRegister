@@ -15,9 +15,7 @@ namespace ContestantRegister.Cqrs.Features.Frontend.Contests.Common.Utils
                 .ReverseMap();
             
             CreateMap<TeamContestRegistrationViewModel, TeamContestRegistration>()
-                .ReverseMap();
-
-            CreateMap<RegisterContestParticipantViewModel, ApplicationUser>();
+                .ReverseMap();            
             
             CreateMap<Contest, SortingViewModel>();
 
