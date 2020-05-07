@@ -135,14 +135,14 @@ namespace ContestantRegister
 
             ConfigureOptions(services);
 
-            //AssemblyStaticticCalculator.Caculate();
+            //AssemblyStatisticCalculator.Caculate();
 
-            var assembies = Assembly
+            var assemblies = Assembly
                 .GetEntryAssembly()
                 .GetReferencedAssemblies()
                 .Where(x => x.Name.StartsWith("ContestantRegister"))
                 .Select(Assembly.Load);
-            services.AddAutoMapper(assembies);
+            services.AddAutoMapper(assemblies);
 
             // Add application services.
             services.AddTransient<IUserService, UserService>();

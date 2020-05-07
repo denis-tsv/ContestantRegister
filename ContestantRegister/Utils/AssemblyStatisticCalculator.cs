@@ -15,14 +15,20 @@ namespace ContestantRegister.Utils
         public int Referenced { get; set; }
         public int Interfaces { get; set; }
         public int AbstractClasses { get; set; }
-        public int StaticClasses { get; set; }
+        public int StaticClassesWithoutMentods { get; set; }
+        public int StaticClassesWithMentods { get; set; }
         public int Classes { get; set; }
         public int Structs { get; set; }
+        public int Events { get; set; }
+        public int Exceptions { get; set; }
+        public int DTOs { get; set; }
         public int Enums { get; set; }
+        public int EventArgs { get; set; }
     }
 
-    public class AssemblyStaticticCalculator
+    public class AssemblyStatisticCalculator
     {
+        private static HashSet<string> BaseMethods = new HashSet<string>() { "ToString", "Equals", "GetHashCode", "GetType" };
         public static void Caculate()
         {
             var assemblies = Assembly
@@ -51,10 +57,17 @@ namespace ContestantRegister.Utils
                 stat.Interfaces = types.Count(x => x.IsInterface);
                 stat.AbstractClasses = types.Count(x => x.IsClass && x.IsAbstract && !x.IsSealed);
                 //https://stackoverflow.com/questions/2639418/use-reflection-to-get-a-list-of-static-classes
-                stat.StaticClasses = types.Count(x => x.IsClass && x.IsAbstract && x.IsSealed);
+                stat.StaticClassesWithoutMentods = types.Count(x => x.IsClass && x.IsAbstract && x.IsSealed && 
+                                                                    x.GetMethods().All(m => BaseMethods.Contains(m.Name)));
+                stat.StaticClassesWithMentods = types.Count(x => x.IsClass && x.IsAbstract && x.IsSealed &&
+                                                                    x.GetMethods().Any(m => !BaseMethods.Contains(m.Name)));
                 stat.Classes = types.Count(x => x.IsClass && !x.IsAbstract && !x.IsSealed);
                 stat.Structs = types.Count(x => x.IsValueType && !x.IsEnum);
                 stat.Enums = types.Count(x => x.IsEnum);
+                stat.Exceptions = types.Count(x => typeof(Exception).IsAssignableFrom(x));
+                stat.Events = types.Count(x => typeof(Delegate).IsAssignableFrom(x));
+                stat.EventArgs = types.Count(x => typeof(EventArgs).IsAssignableFrom(x));
+                stat.DTOs = types.Count(IsDtoType);
                 stats.Add(stat);
             }
             foreach (var p in dict)
@@ -68,6 +81,19 @@ namespace ContestantRegister.Utils
             {
                 csv.WriteRecords(stats);
             }
+        }
+
+        private static bool IsDtoType(Type type)
+        {
+            if (type.Assembly.GetName().Name == "ContestantRegister.Entities") return false;
+            if (!type.IsClass || type.IsAbstract) return false;
+            if (type.GetFields().Any() || 
+                type.GetMethods().Any(x => !x.Name.StartsWith("get_")  && !x.Name.StartsWith("set_") && !BaseMethods.Contains(x.Name)) || 
+                type.GetEvents().Any() ||
+                type.GetConstructors().Length != 1)
+                return false;
+
+            return type.GetProperties().All(x => x.CanRead && x.CanWrite);
         }
     }
 }
